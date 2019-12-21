@@ -37,8 +37,8 @@ fn index() -> &'static str {
     })
 }
 
-fn main() -> std::io::Result<()> {
-    init_tracer();
+fn main() -> thrift::Result<()> {
+    init_tracer()?;
 
     HttpServer::new(|| {
         App::new()
@@ -54,5 +54,7 @@ fn main() -> std::io::Result<()> {
     })
     .bind("127.0.0.1:8088")
     .unwrap()
-    .run()
+    .run()?;
+
+    Ok(())
 }
